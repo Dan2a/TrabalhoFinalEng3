@@ -1,0 +1,296 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+button {
+  cursor: pointer;
+}
+
+.container {
+  width: 90%;
+  height: 90%;
+  border-radius: 10px;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 15px;
+}
+
+.header {
+  min-height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header h1 {
+  font-weight: 900;
+  font-size: 24px;
+  word-break: break-word;
+}
+
+.btnHeader {
+  display: flex;
+  gap: 10px;
+}
+
+.btnAdd {
+  font-size: 16px;
+  padding: 8px 12px;
+  border-radius: 5px;
+  border: none;
+  color: white;
+  background-color: rgb(57, 57, 226);
+  transition: background-color 0.3s ease;
+}
+
+.btnAdd:hover {
+  background-color: rgb(45, 45, 190);
+}
+
+.searchContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px;
+  background: whitesmoke;
+  border-radius: 5px;
+}
+
+.searchContainer label {
+  font-weight: 500;
+}
+
+.search {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#pesquisaCliente {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+}
+
+#btnPesquisarCliente {
+  background-color: rgb(57, 57, 226);
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#btnPesquisarCliente:hover {
+  background-color: rgb(45, 45, 190);
+}
+
+.sugestoesLista {
+  list-style: none;
+  margin-top: 5px;
+  width: 100%;
+}
+
+.divTable {
+  padding: 10px;
+  width: 100%;
+  height: auto;
+  overflow: auto;
+}
+
+.divTable::-webkit-scrollbar {
+  width: 12px;
+  background-color: whitesmoke;
+}
+
+.divTable::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: darkgray;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+caption {
+  font-weight: 600;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+thead {
+  background-color: whitesmoke;
+}
+
+thead th {
+  padding: 10px;
+  text-align: left;
+}
+
+thead th.acao {
+  width: 100px;
+  text-align: center;
+}
+
+tbody td {
+  padding: 8px;
+  border-bottom: 1px solid #eee;
+  word-break: break-word;
+}
+
+tbody td.acao {
+  text-align: center;
+}
+
+.acao button:hover {
+  color: rgb(57, 57, 226);
+}
+
+.modalContainer {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  z-index: 999;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px;
+  background-color: white;
+  border-radius: 10px;
+  max-width: 600px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal .fechar {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 28px;
+  color: red;
+}
+
+.modal .fechar:hover {
+  color: darkred;
+}
+
+.modal h2 {
+  margin-bottom: 20px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.modal label {
+  font-size: 14px;
+  font-weight: 500;
+  margin-top: 10px;
+}
+
+.modalInput, textarea {
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+  resize: none;
+}
+
+.btnModal {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: rgb(57, 57, 226);
+  color: white;
+  font-size: 16px;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.btnModal:hover {
+  background-color: rgb(45, 45, 190);
+}
+
+.resultadosLista {
+  list-style: none;
+  margin-top: 10px;
+  width: 100%;
+}
+
+.active {
+  display: flex;
+}
+
+.active .modal {
+  animation: modal .4s ease;
+}
+
+@keyframes modal {
+  from {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 700px) {
+  body {
+    font-size: 12px;
+  }
+
+  .header h1 {
+    font-size: 18px;
+  }
+
+  .btnAdd {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+
+  .modal {
+    padding: 20px;
+  }
+
+  .modal label {
+    font-size: 12px;
+  }
+}

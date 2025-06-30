@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt_br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Clientes</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Cadastro de Clientes</h1>
+            <div class="btnHeader">
+                <button onclick="abrirModalCliente()" class="btnAdd" id="newCliente">Novo Cliente</button>
+            </div>
+        </header>
+
+        <!-- Pesquisa de Clientes -->
+        <section class="searchContainer">
+            <div class="search">
+                <label for="pesquisaCliente">Pesquisar Cliente</label>
+                <input type="text" id="pesquisaCliente" placeholder="Nome, CPF ou E-mail">
+                <button type="button" id="btnPesquisarCliente">Pesquisar</button>
+            </div>
+            <ul id="sugestoesCliente" class="sugestoesLista"></ul>
+        </section>
+
+        <!-- Lista de Clientes -->
+        <section class="divTable">
+            <table>
+                <caption>Lista de Clientes Cadastrados</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">Código</th>
+                        <th scope="col">Nome</th>
+                        <th scope="col">CPF</th>
+                        <th scope="col">Telefone</th>
+                        <th scope="col" class="acao">Editar</th>
+                        <th scope="col" class="acao">Inativar</th>
+                    </tr>
+                </thead>
+                <tbody id="ClientesTabela"></tbody>
+            </table>
+        </section>
+
+        <!-- Modal de Cadastro de Cliente -->
+        <div class="modalContainer" id="modalCliente" role="dialog" aria-labelledby="modalClienteTitle">
+            <div class="modal">
+                <button class="fechar" aria-label="Fechar" onclick="fecharModalCliente()">
+                    <i class='bx bx-x'></i>
+                </button>
+                <h2 id="modalClienteTitle">Cadastrar Cliente</h2>
+                <form id="formCliente">
+                    <input type="hidden" id="idCliente">
+
+                    <label for="nome">Nome</label>
+                    <input class="modalInput" type="text" id="nome" name="nome" required>
+
+                    <label for="genero">Gênero</label>
+                    <input class="modalInput" type="text" id="genero" name="genero" required>
+
+                    <label for="dataNascimento">Data de Nascimento</label>
+                    <input class="modalInput" type="date" id="dataNascimento" name="dataNascimento" required>
+
+                    <label for="cpf">CPF</label>
+                    <input class="modalInput" type="text" id="cpf" name="cpf" required>
+
+                    <label for="telefone">Telefone</label>
+                    <input class="modalInput" type="text" id="telefone" name="telefone" required>
+
+                    <label for="email">E-mail</label>
+                    <input class="modalInput" type="email" id="email" name="email" required>
+
+                    <label for="senha">Senha</label>
+                    <input class="modalInput" type="password" id="senha" name="senha" required>
+
+                    <label for="confirmarSenha">Confirmar Senha</label>
+                    <input class="modalInput" type="password" id="confirmarSenha" name="confirmarSenha" required>
+
+                    <h3>Endereço Residencial</h3>
+                    <label for="tipoResidencia">Tipo de Residência</label>
+                    <input class="modalInput" type="text" id="tipoResidencia" name="tipoResidencia" required>
+
+                    <label for="tipoLogradouro">Tipo de Logradouro</label>
+                    <input class="modalInput" type="text" id="tipoLogradouro" name="tipoLogradouro" required>
+
+                    <label for="logradouro">Logradouro</label>
+                    <input class="modalInput" type="text" id="logradouro" name="logradouro" required>
+
+                    <label for="numero">Número</label>
+                    <input class="modalInput" type="text" id="numero" name="numero" required>
+
+                    <label for="bairro">Bairro</label>
+                    <input class="modalInput" type="text" id="bairro" name="bairro" required>
+
+                    <label for="cep">CEP</label>
+                    <input class="modalInput" type="text" id="cep" name="cep" required>
+
+                    <label for="cidade">Cidade</label>
+                    <input class="modalInput" type="text" id="cidade" name="cidade" required>
+
+                    <label for="estado">Estado</label>
+                    <input class="modalInput" type="text" id="estado" name="estado" required>
+
+                    <label for="pais">País</label>
+                    <input class="modalInput" type="text" id="pais" name="pais" required>
+
+                    <label for="observacoes">Observações</label>
+                    <textarea class="modalInput" id="observacoes" name="observacoes"></textarea>
+
+                    <h3>Cartão de Crédito</h3>
+                    <label for="numeroCartao">Número do Cartão</label>
+                    <input class="modalInput" type="text" id="numeroCartao" name="numeroCartao">
+
+                    <label for="nomeCartao">Nome Impresso</label>
+                    <input class="modalInput" type="text" id="nomeCartao" name="nomeCartao">
+
+                    <label for="bandeiraCartao">Bandeira</label>
+                    <input class="modalInput" type="text" id="bandeiraCartao" name="bandeiraCartao">
+
+                    <label for="codigoSeguranca">Código de Segurança</label>
+                    <input class="modalInput" type="text" id="codigoSeguranca" name="codigoSeguranca">
+
+                    <label for="preferencial">Preferencial</label>
+                    <input type="checkbox" id="preferencial" name="preferencial">
+
+                    <button class="btnModal" type="submit" id="btnSalvarCliente">Salvar</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
