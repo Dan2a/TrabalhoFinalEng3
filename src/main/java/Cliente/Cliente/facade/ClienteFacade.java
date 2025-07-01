@@ -15,27 +15,15 @@ import java.util.List;
 public class ClienteFacade {
 
     @Autowired private ClienteService clienteService;
+    @Autowired private ValidadorRegrasCliente validador;
 
     public Cliente criarCliente(Cliente cliente) {
-        List<IStrategy> regras = Arrays.asList(
-                new ValidarEnderecoEntregaStrategy(),
-                new ValidarEnderecoCobrancaStrategy(),
-                new ValidarDadosObrigatoriosClienteStrategy(),
-                new ValidarForcaSenhaStrategy(),
-                new CriptografarSenhaStrategy(),
-                new ValidarConfirmacaoSenhaStrategy(),
-                new ValidarComposicaoEnderecoStrategy(),
-                new ValidarBandeiraPermitidaStrategy(),
-                new CalcularRankingClienteStrategy()
-        );
-
-        ValidadorRegrasCliente validador = new ValidadorRegrasCliente(regras);
         validador.validar(cliente);
-
         return clienteService.salvar(cliente);
     }
 
     public Cliente editarCliente(Long id, Cliente cliente) {
+        validador.validar(cliente);
         return clienteService.atualizar(id, cliente);
     }
 

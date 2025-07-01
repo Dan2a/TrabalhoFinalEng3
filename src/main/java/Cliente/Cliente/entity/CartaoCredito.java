@@ -1,5 +1,6 @@
 package Cliente.Cliente.entity;
 
+import Cliente.Cliente.entity.enums.BandeiraCartao;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
