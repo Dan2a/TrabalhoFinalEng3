@@ -4,7 +4,6 @@ import Cliente.Cliente.entity.*;
 import Cliente.Cliente.entity.enums.*;
 import Cliente.Cliente.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
@@ -17,12 +16,9 @@ public class ClienteService {
     @Autowired private CartaoCreditoRepository cartaoCreditoRepository;
     @Autowired private TransacaoRepository transacaoRepository;
 
-    private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-
     public Cliente salvar(Cliente cliente) {
         cliente.setStatus(Status.ATIVO);
         cliente.setDtCadastro(System.currentTimeMillis());
-        cliente.setSenha(passwordEncoder.encode(cliente.getSenha()));
 
         if (cliente.getEnderecos() == null || cliente.getEnderecos().isEmpty()) {
             throw new IllegalArgumentException("Cliente deve ter ao menos um endereço cadastrado.");

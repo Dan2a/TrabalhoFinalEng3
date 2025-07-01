@@ -3,8 +3,11 @@ package Cliente.Cliente.entity;
 import Cliente.Cliente.entity.enums.TipoStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity
@@ -17,7 +20,9 @@ public class Transacao extends EntidadeDominio {
     @Temporal(TemporalType.TIMESTAMP)
     private Date data;
 
-    private Double valor;
+    @Getter
+    @Setter
+    private BigDecimal valor;
 
     @Enumerated(EnumType.STRING)
     private TipoStatus status;
@@ -25,4 +30,5 @@ public class Transacao extends EntidadeDominio {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
+
 }

@@ -27,6 +27,9 @@ public class Cliente extends EntidadeDominio {
     private String senha;
     private int ranking;
 
+    @Transient
+    private String confirmarSenha;
+
     @Enumerated(EnumType.STRING)
     private Status status;
 

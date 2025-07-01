@@ -16,7 +16,7 @@ public class CartaoCredito extends EntidadeDominio {
 
     private String numero;
     private String nomeImpresso;
-    private String bandeira;
+    private BandeiraCartao bandeira;
     private String codigoSeguranca;
     private Boolean preferencial;
 

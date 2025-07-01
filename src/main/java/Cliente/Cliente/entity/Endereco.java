@@ -1,5 +1,6 @@
 package Cliente.Cliente.entity;
 
+import Cliente.Cliente.entity.enums.TipoEndereco;
 import Cliente.Cliente.entity.enums.TiposLogradouros;
 import Cliente.Cliente.entity.enums.TiposResidencias;
 import jakarta.persistence.*;
@@ -19,7 +20,7 @@ public class Endereco extends EntidadeDominio {
     @Enumerated(EnumType.STRING)
     private TiposLogradouros tipoLogradouro;
 
-    private String tipoEndereco; // ENTREGA, COBRANCA, etc
+    private TipoEndereco tipoEndereco;
     private String logradouro;
     private String numero;
     private String bairro;
