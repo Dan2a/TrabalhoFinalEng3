@@ -1,9 +1,11 @@
 package Cliente.Cliente.strategy;
 
 import Cliente.Cliente.entity.Cliente;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public class ValidadorRegrasCliente {
 
     private final List<IStrategy> regras;
