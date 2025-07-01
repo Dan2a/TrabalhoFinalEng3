@@ -1,6 +1,7 @@
 package Cliente.Cliente.facade;
 
 import Cliente.Cliente.entity.*;
+import Cliente.Cliente.entity.enums.Status;
 import Cliente.Cliente.repository.ClienteRepository;
 import Cliente.Cliente.service.ClienteService;
 import Cliente.Cliente.strategy.ValidadorRegrasCliente;
@@ -25,8 +26,8 @@ public class ClienteFacade {
         return clienteService.atualizar(id, cliente);
     }
 
-    public void inativarCliente(Long id) {
-        clienteService.inativar(id);
+    public Status alterarStatusCliente(Long id) {
+        return clienteService.alterarStatus(id);
     }
 
     public List<Cliente> listarClientes(String nome) {
@@ -46,4 +47,9 @@ public class ClienteFacade {
     public List<Transacao> listarTransacoes(Long clienteId) {
         return clienteService.listarTransacoes(clienteId);
     }
+
+    public List<Cliente> consultarComFiltro(Cliente filtro) {
+        return clienteService.consultarComFiltro(filtro);
+    }
+
 }

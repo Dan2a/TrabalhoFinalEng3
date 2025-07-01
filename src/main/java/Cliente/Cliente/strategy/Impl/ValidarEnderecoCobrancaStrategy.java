@@ -12,7 +12,7 @@ public class ValidarEnderecoCobrancaStrategy implements IStrategy {
     public void executar(Cliente cliente) {
         boolean possuiCobranca = cliente.getEnderecos() != null &&
                 cliente.getEnderecos().stream()
-                        .anyMatch(end -> end.getTipoEndereco() == TipoEndereco.COBRANÇA);
+                        .anyMatch(end -> end.getTipoEndereco() == TipoEndereco.COBRANCA);
 
         if (!possuiCobranca) {
             throw new StrategyExecption("Cliente deve possuir ao menos um endereço de cobrança.");

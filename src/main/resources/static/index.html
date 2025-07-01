@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt_br">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="styles.css">
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
 </head>
+
 <body>
     <div class="container">
         <header class="header">
@@ -35,10 +37,10 @@
                     <tr>
                         <th scope="col">Código</th>
                         <th scope="col">Nome</th>
+                        <th scope="col">Genero</th>
                         <th scope="col">CPF</th>
-                        <th scope="col">Telefone</th>
-                        <th scope="col" class="acao">Editar</th>
-                        <th scope="col" class="acao">Inativar</th>
+                        <th scope="col">Status</th>
+                        <th scope="col" class="acao">Info</th>
                     </tr>
                 </thead>
                 <tbody id="ClientesTabela"></tbody>
@@ -52,82 +54,207 @@
                     <i class='bx bx-x'></i>
                 </button>
                 <h2 id="modalClienteTitle">Cadastrar Cliente</h2>
-                <form id="formCliente">
+                <form id="formCliente" class="formGrid">
                     <input type="hidden" id="idCliente">
 
-                    <label for="nome">Nome</label>
-                    <input class="modalInput" type="text" id="nome" name="nome" required>
+                    <div class="formColFull">
+                        <label for="nome">Nome</label>
+                        <input class="modalInput" type="text" id="nome" name="nome" required>
+                    </div>
 
-                    <label for="genero">Gênero</label>
-                    <input class="modalInput" type="text" id="genero" name="genero" required>
+                    <div class="formColFull">
+                        <label for="cpf">CPF</label>
+                        <input class="modalInput" type="text" id="cpf" name="cpf" required>
+                    </div>
 
-                    <label for="dataNascimento">Data de Nascimento</label>
-                    <input class="modalInput" type="date" id="dataNascimento" name="dataNascimento" required>
+                    <div>
+                        <label for="dataNascimento">Data de Nascimento</label>
+                        <input class="modalInput" type="date" id="dataNascimento" name="dataNascimento" required>
+                    </div>
 
-                    <label for="cpf">CPF</label>
-                    <input class="modalInput" type="text" id="cpf" name="cpf" required>
+                    <div>
+                        <label>Gênero</label>
+                        <div class="radio-group">
+                            <label>
+                                <input type="radio" name="genero" value="MASCULINO" required>
+                                Masculino
+                            </label>
+                            <label>
+                                <input type="radio" name="genero" value="FEMININO">
+                                Feminino
+                            </label>
+                        </div>
+                    </div>
 
-                    <label for="telefone">Telefone</label>
-                    <input class="modalInput" type="text" id="telefone" name="telefone" required>
+                    <div class="formColFull">
+                        <label for="email">E-mail</label>
+                        <input class="modalInput" type="email" id="email" name="email" required>
+                    </div>
 
-                    <label for="email">E-mail</label>
-                    <input class="modalInput" type="email" id="email" name="email" required>
+                    <div>
+                        <label for="senha">Senha</label>
+                        <input class="modalInput" type="password" id="senha" name="senha" required>
+                    </div>
 
-                    <label for="senha">Senha</label>
-                    <input class="modalInput" type="password" id="senha" name="senha" required>
+                    <div>
+                        <label for="confirmarSenha">Confirmar Senha</label>
+                        <input class="modalInput" type="password" id="confirmarSenha" name="confirmarSenha" required>
+                    </div>
 
-                    <label for="confirmarSenha">Confirmar Senha</label>
-                    <input class="modalInput" type="password" id="confirmarSenha" name="confirmarSenha" required>
+                    <div class="formColFull">
+                        <h3>Contatos</h3>
+                    </div>
 
-                    <h3>Endereço Residencial</h3>
-                    <label for="tipoResidencia">Tipo de Residência</label>
-                    <input class="modalInput" type="text" id="tipoResidencia" name="tipoResidencia" required>
+                    <div class="formColFull">
+                        <div id="telefonesContainer"></div>
+                        <button type="button" class="btnAdd btnAddModal" onclick="adicionarTelefone()">+ Adicionar
+                            Telefone</button>
+                    </div>
 
-                    <label for="tipoLogradouro">Tipo de Logradouro</label>
-                    <input class="modalInput" type="text" id="tipoLogradouro" name="tipoLogradouro" required>
 
-                    <label for="logradouro">Logradouro</label>
-                    <input class="modalInput" type="text" id="logradouro" name="logradouro" required>
+                    <!-- Endereço Fixo (obrigatório) -->
+                    <div class="formColFull">
+                        <h3>Endereço Residencial Fixo</h3>
+                    </div>
 
-                    <label for="numero">Número</label>
-                    <input class="modalInput" type="text" id="numero" name="numero" required>
+                    <!-- Linha 1: Tipo Residência (select enum) e CEP -->
+                    <div class="enderecoRow formColFull">
+                        <div class="enderecoCol">
+                            <label for="tipoResidencia">Tipo de Residência</label>
+                            <select class="modalInput" id="tipoResidencia" name="tipoResidencia" required>
+                                <option value="">Selecione</option>
+                                <option value="CASA">Casa</option>
+                                <option value="APARTAMENTO">Apartamento</option>
+                                <option value="KITNET">Kitnet</option>
+                                <option value="SOBRADO">Sobrados</option>
+                                <option value="OUTROS">Outros</option>
+                            </select>
+                        </div>
 
-                    <label for="bairro">Bairro</label>
-                    <input class="modalInput" type="text" id="bairro" name="bairro" required>
+                        <div class="enderecoCol cepContainer">
+                            <label for="cep">CEP</label>
+                            <div class="cepInputGroup">
+                                <input class="modalInput" type="text" id="cep" name="cep" required maxlength="9"
+                                    placeholder="00000-000">
+                                <button type="button" id="btnBuscarCep" title="Buscar CEP">
+                                     <i class='bx bx-search'></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
 
-                    <label for="cep">CEP</label>
-                    <input class="modalInput" type="text" id="cep" name="cep" required>
+                    <!-- Linha 2: Tipo Logradouro (select enum), Logradouro, Número -->
+                    <div class="enderecoRow formColFull">
+                        <div class="enderecoCol">
+                            <label for="tipoLogradouro">Tipo de Logradouro</label>
+                            <select class="modalInput" id="tipoLogradouro" name="tipoLogradouro" required>
+                                <option value="">Selecione</option>
+                                <option value="RUA">Rua</option>
+                                <option value="AVENIDA">Avenida</option>
+                                <option value="TRAVESSA">Travessa</option>
+                                <option value="ALAMEDA">Alameda</option>
+                                <option value="ESTRADA">Estrada</option>
+                                <option value="RODOVIA">Rodovia</option>
+                                <option value="PRACA">Praça</option>
+                                <option value="VIELA">Viela</option>
+                                <option value="LARGO">Largo</option>
+                            </select>
+                        </div>
 
-                    <label for="cidade">Cidade</label>
-                    <input class="modalInput" type="text" id="cidade" name="cidade" required>
+                        <div class="enderecoCol flex-grow-2">
+                            <label for="logradouro">Logradouro</label>
+                            <input class="modalInput" type="text" id="logradouro" name="logradouro" required>
+                        </div>
 
-                    <label for="estado">Estado</label>
-                    <input class="modalInput" type="text" id="estado" name="estado" required>
+                        <div class="enderecoCol">
+                            <label for="numero">Número</label>
+                            <input class="modalInput" type="text" id="numero" name="numero" required>
+                        </div>
+                    </div>
 
-                    <label for="pais">País</label>
-                    <input class="modalInput" type="text" id="pais" name="pais" required>
+                    <!-- Linha 3: Bairro e Cidade -->
+                    <div class="enderecoRow formColFull">
+                        <div class="enderecoCol">
+                            <label for="bairro">Bairro</label>
+                            <input class="modalInput" type="text" id="bairro" name="bairro" required>
+                        </div>
 
-                    <label for="observacoes">Observações</label>
-                    <textarea class="modalInput" id="observacoes" name="observacoes"></textarea>
+                        <div class="enderecoCol">
+                            <label for="cidade">Cidade</label>
+                            <input class="modalInput" type="text" id="cidade" name="cidade" required>
+                        </div>
+                    </div>
 
-                    <h3>Cartão de Crédito</h3>
-                    <label for="numeroCartao">Número do Cartão</label>
-                    <input class="modalInput" type="text" id="numeroCartao" name="numeroCartao">
+                    <!-- Linha 4: Estado e País -->
+                    <div class="enderecoRow formColFull">
+                        <div class="enderecoCol">
+                            <label for="estado">Estado</label>
+                            <input class="modalInput" type="text" id="estado" name="estado" required>
+                        </div>
 
-                    <label for="nomeCartao">Nome Impresso</label>
-                    <input class="modalInput" type="text" id="nomeCartao" name="nomeCartao">
+                        <div class="enderecoCol">
+                            <label for="pais">País</label>
+                            <input class="modalInput" type="text" id="pais" name="pais" required>
+                        </div>
+                    </div>
 
-                    <label for="bandeiraCartao">Bandeira</label>
-                    <input class="modalInput" type="text" id="bandeiraCartao" name="bandeiraCartao">
+                    <!-- Linha 5: Observações -->
+                    <div class="enderecoRow formColFull">
+                        <div class="enderecoCol formColFull">
+                            <label for="observacoes">Observações</label>
+                            <textarea class="modalInput" id="observacoes" name="observacoes"></textarea>
+                        </div>
+                    </div>
 
-                    <label for="codigoSeguranca">Código de Segurança</label>
-                    <input class="modalInput" type="text" id="codigoSeguranca" name="codigoSeguranca">
+                    <!-- Container para Endereços Extras -->
+                    <div class="formColFull">
+                        <h3>Outros Endereços</h3>
+                    </div>
 
-                    <label for="preferencial">Preferencial</label>
-                    <input type="checkbox" id="preferencial" name="preferencial">
+                    <div id="enderecosContainer" class="formColFull">
+                        <!-- Endereços extras serão adicionados aqui via JS -->
+                    </div>
 
-                    <button class="btnModal" type="submit" id="btnSalvarCliente">Salvar</button>
+                    <!-- Botão para adicionar endereço extra -->
+                    <div class="formColFull" style="text-align:right;">
+                        <button type="button" class="btnAdd btnAddModal" onclick="adicionarEndereco()">Adicionar
+                            Endereço</button>
+                    </div>
+
+                    <div class="formColFull">
+                        <h3>Cartão de Crédito</h3>
+                    </div>
+
+                    <div class="formColFull">
+                        <label for="numeroCartao">Número do Cartão</label>
+                        <input class="modalInput" type="text" id="numeroCartao" name="numeroCartao">
+                    </div>
+
+                    <div>
+                        <label for="nomeCartao">Nome Impresso</label>
+                        <input class="modalInput" type="text" id="nomeCartao" name="nomeCartao">
+                    </div>
+
+                    <div>
+                        <label for="bandeiraCartao">Bandeira</label>
+                        <input class="modalInput" type="text" id="bandeiraCartao" name="bandeiraCartao">
+                    </div>
+
+                    <div>
+                        <label for="codigoSeguranca">Código de Segurança</label>
+                        <input class="modalInput" type="text" id="codigoSeguranca" name="codigoSeguranca">
+                    </div>
+
+                    <div>
+                        <label for="preferencial">Preferencial</label><br>
+                        <input type="checkbox" id="preferencial" name="preferencial">
+                    </div>
+
+                    <div class="formColFull">
+                        <button class="btnModal" type="submit" id="btnSalvarCliente">Salvar</button>
+                    </div>
                 </form>
+
             </div>
         </div>
 
@@ -135,4 +262,5 @@
 
     <script src="script.js"></script>
 </body>
+
 </html>

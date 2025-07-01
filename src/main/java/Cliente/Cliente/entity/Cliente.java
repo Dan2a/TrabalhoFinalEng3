@@ -16,13 +16,17 @@ public class Cliente extends EntidadeDominio {
     private String nome;
 
     @Enumerated(EnumType.STRING)
+    @Column(length = 20)
     private Genero genero;
 
     @Temporal(TemporalType.DATE)
     private Date dataNascimento;
 
     private String cpf;
-    private String telefone;
+
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Telefone> telefones;
+
     private String email;
     private String senha;
     private int ranking;
@@ -31,6 +35,7 @@ public class Cliente extends EntidadeDominio {
     private String confirmarSenha;
 
     @Enumerated(EnumType.STRING)
+    @Column(length = 20)
     private Status status;
 
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)

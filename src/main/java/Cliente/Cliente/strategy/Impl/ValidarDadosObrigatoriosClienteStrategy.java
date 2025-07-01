@@ -1,7 +1,7 @@
 package Cliente.Cliente.strategy.Impl;
 
 import Cliente.Cliente.entity.Cliente;
-import Cliente.Cliente.entity.enums.Genero;
+import Cliente.Cliente.entity.Telefone;
 import Cliente.Cliente.strategy.StrategyExecption;
 import Cliente.Cliente.strategy.IStrategy;
 import org.springframework.stereotype.Component;
@@ -27,8 +27,11 @@ public class ValidarDadosObrigatoriosClienteStrategy implements IStrategy {
             throw new StrategyExecption("O CPF do cliente é obrigatório.");
         }
 
-        if (cliente.getTelefone() == null || cliente.getTelefone().isBlank()) {
-            throw new StrategyExecption("O telefone do cliente é obrigatório.");
+        for (Telefone tel : cliente.getTelefones()) {
+            if (tel.getTipo() == null || tel.getDdd() == null || tel.getDdd().isBlank()
+                    || tel.getNumero() == null || tel.getNumero().isBlank()) {
+                throw new StrategyExecption("Tipo, DDD e número do telefone são obrigatórios.");
+            }
         }
 
         if (cliente.getEmail() == null || cliente.getEmail().isBlank()) {

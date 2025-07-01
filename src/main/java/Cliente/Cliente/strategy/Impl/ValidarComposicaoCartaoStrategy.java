@@ -16,7 +16,7 @@ public class ValidarComposicaoCartaoStrategy implements IStrategy {
         }
 
         for (CartaoCredito cartao : cliente.getCartoesCredito()) {
-            if (isBlank(cartao.getNumero())) {
+            if (isBlank(cartao.getNumeroCartao())) {
                 throw new StrategyExecption("Número do cartão é obrigatório.");
             }
 

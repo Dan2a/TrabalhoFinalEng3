@@ -1,6 +1,7 @@
 package Cliente.Cliente.entity;
 
 import Cliente.Cliente.entity.enums.TipoStatus;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,8 +26,10 @@ public class Transacao extends EntidadeDominio {
     private BigDecimal valor;
 
     @Enumerated(EnumType.STRING)
+    @Column(length = 20)
     private TipoStatus status;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;

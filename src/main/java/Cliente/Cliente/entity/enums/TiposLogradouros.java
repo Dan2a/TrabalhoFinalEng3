@@ -1,5 +1,5 @@
 package Cliente.Cliente.entity.enums;
 
 public enum TiposLogradouros {
-    CASA, APARTAMENTO, KITNET, SOBRADO, OUTROS
+    RUA, AVENIDA, TRAVESSA, ALAMEDA, ESTRADA, RODOVIA, PRACA, VIELA, LARGO
 }

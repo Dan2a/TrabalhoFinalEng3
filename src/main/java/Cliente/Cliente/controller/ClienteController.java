@@ -1,6 +1,7 @@
 package Cliente.Cliente.controller;
 
 import Cliente.Cliente.entity.*;
+import Cliente.Cliente.entity.enums.Status;
 import Cliente.Cliente.facade.ClienteFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -23,10 +24,10 @@ public class ClienteController {
         return ResponseEntity.ok(clienteFacade.editarCliente(id, cliente));
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> inativar(@PathVariable Long id) {
-        clienteFacade.inativarCliente(id);
-        return ResponseEntity.noContent().build();
+    @PutMapping("/{id}/status")
+    public ResponseEntity<Status> alterarStatus(@PathVariable Long id) {
+        Status statusAtualizado = clienteFacade.alterarStatusCliente(id);
+        return ResponseEntity.ok(statusAtualizado);
     }
 
     @GetMapping
@@ -47,5 +48,11 @@ public class ClienteController {
     @GetMapping("/{id}/cartoes")
     public ResponseEntity<List<CartaoCredito>> listarCartoes(@PathVariable Long id) {
         return ResponseEntity.ok(clienteFacade.listarCartoes(id));
+    }
+
+    @PostMapping("/filtro")
+    public ResponseEntity<List<Cliente>> consultarComFiltro(@RequestBody Cliente filtro) {
+        List<Cliente> clientes = clienteFacade.consultarComFiltro(filtro);
+        return ResponseEntity.ok(clientes);
     }
 }
